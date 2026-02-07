@@ -1,0 +1,30 @@
+; PlatformIO Override Configuration Template
+; Copy this file to platformio_override.ini and customize for your setup
+; platformio_override.ini is gitignored and won't be committed
+
+[platformio]
+; Select your board type (uncomment and modify)
+default_envs = wemos_d1_mini32
+
+; Uncomment and set your specific serial port
+; Linux/Mac examples:
+; extra_scripts =
+; upload_port = /dev/ttyUSB0
+; monitor_port = /dev/ttyUSB0
+
+; Windows examples:
+; upload_port = COM3
+; monitor_port = COM3
+
+; Override common settings if needed
+[env]
+; Uncomment to change upload speed if you have issues
+; upload_speed = 115200
+
+; Uncomment to change monitor baud rate
+; monitor_speed = 115200
+
+; Add custom build flags
+; build_flags =
+;     ${common.build_flags}
+;     -DMY_CUSTOM_FLAG=1

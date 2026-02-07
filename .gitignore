@@ -1,0 +1,28 @@
+# PlatformIO
+.pio/
+.vscode/
+.clang_complete
+.gcc-flags.json
+.venv/
+
+# User-specific PlatformIO overrides
+platformio_override.ini
+
+# Build files
+*.o
+*.a
+*.elf
+*.bin
+
+# IDE
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Credentials (create a separate config file)
+src/config.h
