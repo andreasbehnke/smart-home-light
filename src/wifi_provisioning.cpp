@@ -1,5 +1,7 @@
 #include "wifi_provisioning.h"
 #include "portal_material.h"
+#include "web_material.h"
+#include "homeServer.h"
 
 #define WIFI_TIMEOUT_MS 20000
 #define AP_TIMEOUT_MS 300000  // 5 minutes
@@ -17,6 +19,7 @@ bool WiFiProvisioning::begin() {
         if (connectToWiFi(ssid, password)) {
             Serial.println("Connected to saved WiFi network");
             apMode = false;
+            setupHomeServer(server);
             return true;
         }
 

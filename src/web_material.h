@@ -7,36 +7,21 @@
 const char MATERIAL_CSS[] PROGMEM = R"css(
 /* Material Design Variables */
 :root {
-    --md-primary: #1976d2;
-    --md-primary-dark: #1565c0;
-    --md-primary-light: #42a5f5;
-    --md-accent: #ff4081;
-    --md-background: #fafafa;
-    --md-surface: #ffffff;
-    --md-error: #f44336;
-    --md-success: #4caf50;
-    --md-text-primary: rgba(0, 0, 0, 0.87);
-    --md-text-secondary: rgba(0, 0, 0, 0.60);
-    --md-text-disabled: rgba(0, 0, 0, 0.38);
-    --md-divider: rgba(0, 0, 0, 0.12);
-    --md-elevation-1: 0 2px 1px -1px rgba(0,0,0,0.2), 0 1px 1px 0 rgba(0,0,0,0.14), 0 1px 3px 0 rgba(0,0,0,0.12);
-    --md-elevation-2: 0 3px 1px -2px rgba(0,0,0,0.2), 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12);
-    --md-elevation-4: 0 2px 4px -1px rgba(0,0,0,0.2), 0 4px 5px 0 rgba(0,0,0,0.14), 0 1px 10px 0 rgba(0,0,0,0.12);
-}
-
-/* Dark Mode */
-@media (prefers-color-scheme: dark) {
-    :root {
-        --md-primary: #90caf9;
-        --md-primary-dark: #42a5f5;
-        --md-primary-light: #bbdefb;
-        --md-background: #121212;
-        --md-surface: #1e1e1e;
-        --md-text-primary: rgba(255, 255, 255, 0.87);
-        --md-text-secondary: rgba(255, 255, 255, 0.60);
-        --md-text-disabled: rgba(255, 255, 255, 0.38);
-        --md-divider: rgba(255, 255, 255, 0.12);
-    }
+    --md-primary: #4a4a4a;
+    --md-primary-dark: #2f2f2f;
+    --md-primary-light: #6a6a6a;
+    --md-accent: #888888;
+    --md-background: #2b2b2b;
+    --md-surface: #3a3a3a;
+    --md-error: #cf6679;
+    --md-success: #81c784;
+    --md-text-primary: #e0e0e0;
+    --md-text-secondary: #b0b0b0;
+    --md-text-disabled: #707070;
+    --md-divider: rgba(255, 255, 255, 0.12);
+    --md-elevation-1: 0 2px 1px -1px rgba(0,0,0,0.4), 0 1px 1px 0 rgba(0,0,0,0.28), 0 1px 3px 0 rgba(0,0,0,0.24);
+    --md-elevation-2: 0 3px 1px -2px rgba(0,0,0,0.4), 0 2px 2px 0 rgba(0,0,0,0.28), 0 1px 5px 0 rgba(0,0,0,0.24);
+    --md-elevation-4: 0 2px 4px -1px rgba(0,0,0,0.4), 0 4px 5px 0 rgba(0,0,0,0.28), 0 1px 10px 0 rgba(0,0,0,0.24);
 }
 
 * {
@@ -342,7 +327,7 @@ button:disabled,
 class MaterialPage {
 public:
     // Generate HTML page header with Material CSS
-    static String getHeader(const String& title, const String& themeColor = "#1976d2") {
+    static String getHeader(const String& title, const String& themeColor = "#4a4a4a") {
         String html = "<!DOCTYPE html><html lang=\"en\"><head>";
         html += "<meta charset=\"UTF-8\">";
         html += "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no\">";

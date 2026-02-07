@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#4a4a4a">
+    <title>Material Design Showcase</title>
+    <style>
+/* Material Design Variables */
+:root {
+    --md-primary: #4a4a4a;
+    --md-primary-dark: #2f2f2f;
+    --md-primary-light: #6a6a6a;
+    --md-accent: #888888;
+    --md-background: #2b2b2b;
+    --md-surface: #3a3a3a;
+    --md-error: #cf6679;
+    --md-success: #81c784;
+    --md-text-primary: #e0e0e0;
+    --md-text-secondary: #b0b0b0;
+    --md-text-disabled: #707070;
+    --md-divider: rgba(255, 255, 255, 0.12);
+    --md-elevation-1: 0 2px 1px -1px rgba(0,0,0,0.4), 0 1px 1px 0 rgba(0,0,0,0.28), 0 1px 3px 0 rgba(0,0,0,0.24);
+    --md-elevation-2: 0 3px 1px -2px rgba(0,0,0,0.4), 0 2px 2px 0 rgba(0,0,0,0.28), 0 1px 5px 0 rgba(0,0,0,0.24);
+    --md-elevation-4: 0 2px 4px -1px rgba(0,0,0,0.4), 0 4px 5px 0 rgba(0,0,0,0.28), 0 1px 10px 0 rgba(0,0,0,0.24);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: var(--md-background);
+    color: var(--md-text-primary);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* App Bar */
+.app-bar {
+    background: var(--md-primary);
+    color: white;
+    padding: 16px;
+    margin: -16px -16px 24px -16px;
+    box-shadow: var(--md-elevation-4);
+}
+
+.app-bar h1 {
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: 0.15px;
+}
+
+.app-bar .subtitle {
+    font-size: 14px;
+    opacity: 0.7;
+    margin-top: 4px;
+}
+
+/* Card */
+.card {
+    background: var(--md-surface);
+    border-radius: 4px;
+    box-shadow: var(--md-elevation-2);
+    padding: 24px;
+    max-width: 500px;
+    width: 100%;
+    margin: 0 auto 16px auto;
+}
+
+.card-title {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 16px;
+    color: var(--md-text-primary);
+}
+
+/* Form Elements */
+.form-field {
+    position: relative;
+    margin-bottom: 24px;
+}
+
+label {
+    display: block;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.4px;
+    color: var(--md-text-secondary);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="number"],
+input[type="email"],
+select {
+    width: 100%;
+    height: 56px;
+    padding: 16px;
+    font-size: 16px;
+    font-family: inherit;
+    background: var(--md-surface);
+    border: 1px solid var(--md-divider);
+    border-radius: 4px;
+    color: var(--md-text-primary);
+    transition: all 0.2s;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='%23aaa'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    padding-right: 40px;
+}
+
+input:hover,
+select:hover {
+    border-color: var(--md-text-primary);
+}
+
+input:focus,
+select:focus {
+    outline: none;
+    border-color: var(--md-primary-light);
+    border-width: 2px;
+    padding: 15px;
+}
+
+/* Button - Material Raised */
+button,
+.btn {
+    width: 100%;
+    height: 48px;
+    padding: 0 24px;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: inherit;
+    letter-spacing: 1.25px;
+    text-transform: uppercase;
+    background: var(--md-primary);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    box-shadow: var(--md-elevation-2);
+    cursor: pointer;
+    transition: all 0.2s;
+    -webkit-tap-highlight-color: transparent;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+button:hover,
+.btn:hover {
+    background: var(--md-primary-dark);
+    box-shadow: var(--md-elevation-4);
+}
+
+button:active,
+.btn:active {
+    box-shadow: var(--md-elevation-1);
+}
+
+button:disabled,
+.btn:disabled {
+    background: var(--md-text-disabled);
+    color: var(--md-text-secondary);
+    box-shadow: none;
+    cursor: not-allowed;
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--md-text-primary);
+    box-shadow: none;
+    border: 1px solid var(--md-divider);
+}
+
+.btn-secondary:hover {
+    background: rgba(74, 74, 74, 0.08);
+    box-shadow: none;
+}
+
+/* Status Messages */
+.status {
+    margin-top: 16px;
+    padding: 16px;
+    border-radius: 4px;
+    font-size: 14px;
+    animation: slideIn 0.2s;
+}
+
+.status.success {
+    background: rgba(129, 199, 132, 0.1);
+    color: var(--md-success);
+    border-left: 4px solid var(--md-success);
+}
+
+.status.error {
+    background: rgba(207, 102, 121, 0.1);
+    color: var(--md-error);
+    border-left: 4px solid var(--md-error);
+}
+
+.status.info {
+    background: rgba(74, 74, 74, 0.1);
+    color: var(--md-text-primary);
+    border-left: 4px solid var(--md-primary);
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Loading State */
+.loading {
+    text-align: center;
+    color: var(--md-text-secondary);
+    padding: 16px;
+}
+
+/* Material Spinner */
+.spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--md-text-disabled);
+    border-top-color: var(--md-primary-light);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* List Items */
+.list-item {
+    padding: 16px;
+    border-bottom: 1px solid var(--md-divider);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.list-item:last-child {
+    border-bottom: none;
+}
+
+.list-item-text {
+    flex: 1;
+}
+
+.list-item-title {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--md-text-primary);
+}
+
+.list-item-subtitle {
+    font-size: 14px;
+    color: var(--md-text-secondary);
+    margin-top: 4px;
+}
+
+/* Divider */
+.divider {
+    height: 1px;
+    background: var(--md-divider);
+    margin: 16px 0;
+}
+
+/* Chip */
+.chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 12px;
+    border-radius: 16px;
+    background: var(--md-surface);
+    border: 1px solid var(--md-divider);
+    font-size: 14px;
+    color: var(--md-text-primary);
+    margin: 4px;
+}
+
+/* Responsive */
+@media (min-width: 600px) {
+    body {
+        padding: 32px;
+    }
+    .card {
+        padding: 32px;
+    }
+}
+    </style>
+</head>
+<body>
+    <!-- App Bar -->
+    <div class="app-bar">
+        <h1>Material Design Showcase</h1>
+        <div class="subtitle">Complete component reference</div>
+    </div>
+
+    <!-- Card 1: Form Elements -->
+    <div class="card">
+        <div class="card-title">Form Elements</div>
+        <form>
+            <div class="form-field">
+                <label>Text Input</label>
+                <input type="text" id="text1" name="text1" placeholder="Enter text..." required>
+            </div>
+
+            <div class="form-field">
+                <label>Password Input</label>
+                <input type="password" id="pass1" name="pass1" required>
+            </div>
+
+            <div class="form-field">
+                <label>Number Input</label>
+                <input type="number" id="num1" name="num1" min="0" max="100" value="50">
+            </div>
+
+            <div class="form-field">
+                <label>Email Input</label>
+                <input type="email" id="email1" name="email1" placeholder="email@example.com">
+            </div>
+
+            <div class="form-field">
+                <label>Select Dropdown</label>
+                <select id="select1" name="select1">
+                    <option value="">Choose an option...</option>
+                    <option value="1">Option 1</option>
+                    <option value="2">Option 2</option>
+                    <option value="3">Option 3</option>
+                </select>
+            </div>
+
+            <button type="submit">Submit Form</button>
+        </form>
+    </div>
+
+    <!-- Card 2: Buttons -->
+    <div class="card">
+        <div class="card-title">Buttons</div>
+        <button type="button" id="btn1">Primary Button</button>
+        <br><br>
+        <button type="button" id="btn2" class="btn-secondary">Secondary Button</button>
+        <br><br>
+        <button disabled>Disabled Button</button>
+    </div>
+
+    <!-- Card 3: Status Messages -->
+    <div class="card">
+        <div class="card-title">Status Messages</div>
+        <div class="status success">Success! Operation completed successfully.</div>
+        <div class="status error">Error! Something went wrong.</div>
+        <div class="status info">Info: This is an informational message.</div>
+    </div>
+
+    <!-- Card 4: Loading State -->
+    <div class="card">
+        <div class="card-title">Loading State</div>
+        <div class="loading">
+            <span class="spinner"></span>Loading data...
+        </div>
+    </div>
+
+    <!-- Card 5: List Items -->
+    <div class="card">
+        <div class="card-title">List Items</div>
+        <div class="list-item">
+            <div class="list-item-text">
+                <div class="list-item-title">List Item 1</div>
+                <div class="list-item-subtitle">This is a subtitle for item 1</div>
+            </div>
+        </div>
+        <div class="list-item">
+            <div class="list-item-text">
+                <div class="list-item-title">List Item 2</div>
+                <div class="list-item-subtitle">This is a subtitle for item 2</div>
+            </div>
+            <span class="chip">Badge</span>
+        </div>
+        <div class="list-item">
+            <div class="list-item-text">
+                <div class="list-item-title">List Item 3</div>
+                <div class="list-item-subtitle">This is a subtitle for item 3</div>
+            </div>
+            <button style="width:auto; padding:0 16px;">Action</button>
+        </div>
+        <div class="list-item">
+            <div class="list-item-text">
+                <div class="list-item-title">Simple List Item</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Card 6: Typography & Dividers -->
+    <div class="card">
+        <div class="card-title">Typography & Dividers</div>
+        <p style="color: var(--md-text-primary); margin-bottom: 8px;">Primary text color (light grey)</p>
+        <p style="color: var(--md-text-secondary); margin-bottom: 8px;">Secondary text color (medium grey)</p>
+        <p style="color: var(--md-text-disabled); margin-bottom: 16px;">Disabled text color (dark grey)</p>
+        <div class="divider"></div>
+        <p style="margin-top: 16px;">Text after divider</p>
+    </div>
+
+    <!-- Card 7: Chips -->
+    <div class="card">
+        <div class="card-title">Chips</div>
+        <div>
+            <span class="chip">Chip 1</span>
+            <span class="chip">Chip 2</span>
+            <span class="chip">Chip 3</span>
+            <span class="chip">Long Chip Text Here</span>
+        </div>
+    </div>
+
+    <!-- Card 8: Color Variables -->
+    <div class="card">
+        <div class="card-title">Color Variables</div>
+        <div class="list-item">
+            <span style="display:inline-block; width:30px; height:30px; background:var(--md-primary); border:1px solid var(--md-divider); margin-right:10px;"></span>
+            <span>Primary (#4a4a4a)</span>
+        </div>
+        <div class="list-item">
+            <span style="display:inline-block; width:30px; height:30px; background:var(--md-primary-dark); border:1px solid var(--md-divider); margin-right:10px;"></span>
+            <span>Primary Dark (#2f2f2f)</span>
+        </div>
+        <div class="list-item">
+            <span style="display:inline-block; width:30px; height:30px; background:var(--md-background); border:1px solid var(--md-divider); margin-right:10px;"></span>
+            <span>Background (#2b2b2b)</span>
+        </div>
+        <div class="list-item">
+            <span style="display:inline-block; width:30px; height:30px; background:var(--md-surface); border:1px solid var(--md-divider); margin-right:10px;"></span>
+            <span>Surface (#3a3a3a)</span>
+        </div>
+        <div class="list-item">
+            <span style="display:inline-block; width:30px; height:30px; background:var(--md-success); border:1px solid var(--md-divider); margin-right:10px;"></span>
+            <span>Success (#81c784)</span>
+        </div>
+        <div class="list-item">
+            <span style="display:inline-block; width:30px; height:30px; background:var(--md-error); border:1px solid var(--md-divider); margin-right:10px;"></span>
+            <span>Error (#cf6679)</span>
+        </div>
+    </div>
+
+    <!-- Card 9: Elevation Levels -->
+    <div class="card">
+        <div class="card-title">Elevation Levels</div>
+        <div style="padding:20px; margin:10px 0; background:var(--md-surface); box-shadow:var(--md-elevation-1);">
+            Elevation 1
+        </div>
+        <div style="padding:20px; margin:10px 0; background:var(--md-surface); box-shadow:var(--md-elevation-2);">
+            Elevation 2 (default for cards)
+        </div>
+        <div style="padding:20px; margin:10px 0; background:var(--md-surface); box-shadow:var(--md-elevation-4);">
+            Elevation 4 (app bar)
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('btn1').addEventListener('click', function() {
+            alert('Primary button clicked!');
+        });
+        document.getElementById('btn2').addEventListener('click', function() {
+            alert('Secondary button clicked!');
+        });
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Form submitted!');
+        });
+    </script>
+</body>
+</html>
