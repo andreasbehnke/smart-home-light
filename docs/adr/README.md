@@ -73,5 +73,6 @@ List of all ADRs in this project:
 - [0001-use-platformio-for-build-system.md](0001-use-platformio-for-build-system.md) - Use PlatformIO as build system
 - [0002-use-espasync-wifimanager-for-provisioning.md](0002-use-espasync-wifimanager-for-provisioning.md) - Custom WiFi provisioning with captive portal
 - [0003-material-design-framework-for-web-ui.md](0003-material-design-framework-for-web-ui.md) - Use Material Design framework for all web interfaces
+- [0004-use-neopixelbus-for-led-control.md](0004-use-neopixelbus-for-led-control.md) - Use NeoPixelBus for SK6812 RGBW LED strip control
 
 (Add new ADRs to this list as they are created)
