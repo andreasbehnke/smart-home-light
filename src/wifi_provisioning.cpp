@@ -1,10 +1,10 @@
 #include "wifi_provisioning.h"
+#include "portal_material.h"
 
 #define WIFI_TIMEOUT_MS 20000
 #define AP_TIMEOUT_MS 300000  // 5 minutes
-#define DNS_PORT 53
 
-WiFiProvisioning::WiFiProvisioning() : server(nullptr), dnsServer(nullptr), apMode(false) {}
+WiFiProvisioning::WiFiProvisioning() : server(nullptr), apMode(false) {}
 
 bool WiFiProvisioning::begin() {
     String ssid, password;
@@ -30,10 +30,7 @@ bool WiFiProvisioning::begin() {
 }
 
 void WiFiProvisioning::loop() {
-    // Process DNS requests in AP mode
-    if (apMode && dnsServer) {
-        dnsServer->processNextRequest();
-    }
+    // Reserved for future use (e.g., AP timeout handling)
 }
 
 bool WiFiProvisioning::isConnected() {
@@ -125,131 +122,8 @@ void WiFiProvisioning::startConfigPortal() {
     // Small delay to let AP start
     delay(100);
 
-    // Setup DNS server (captive portal)
-    setupDNS();
-
     // Setup web server
     setupWebServer();
-}
-
-void WiFiProvisioning::setupDNS() {
-    if (dnsServer) {
-        delete dnsServer;
-    }
-
-    dnsServer = new DNSServer();
-
-    // Redirect all DNS queries to this device's IP (192.168.4.1)
-    dnsServer->setErrorReplyCode(DNSReplyCode::NoError);
-    dnsServer->start(DNS_PORT, "*", WiFi.softAPIP());
-
-    Serial.println("DNS Server started for captive portal");
-}
-
-String getPortalHTML() {
-    return R"html(
-<!DOCTYPE html>
-<html>
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>WiFi Setup</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background: #f0f0f0; }
-        .container { max-width: 400px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        h1 { color: #333; text-align: center; margin-bottom: 30px; }
-        .form-group { margin-bottom: 20px; }
-        label { display: block; margin-bottom: 5px; color: #666; font-weight: bold; }
-        input[type="text"], input[type="password"], select { width: 100%; padding: 10px; border: 2px solid #ddd; border-radius: 5px; font-size: 16px; box-sizing: border-box; }
-        input[type="text"]:focus, input[type="password"]:focus, select:focus { outline: none; border-color: #667eea; }
-        button { width: 100%; padding: 12px; background: #667eea; color: white; border: none; border-radius: 5px; font-size: 16px; font-weight: bold; cursor: pointer; }
-        button:hover { background: #5568d3; }
-        button:disabled { background: #ccc; cursor: not-allowed; }
-        .status { margin-top: 15px; padding: 10px; border-radius: 5px; display: none; }
-        .status.success { background: #d4edda; color: #155724; display: block; }
-        .status.error { background: #f8d7da; color: #721c24; display: block; }
-        .scanning { text-align: center; color: #666; padding: 10px; }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>Smart Home Light<br>WiFi Setup</h1>
-        <form id="wifiForm">
-            <div class="form-group">
-                <label for="ssid">WiFi Network</label>
-                <select id="ssid" name="ssid" required>
-                    <option value="">Scanning...</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            <button type="submit" id="submitBtn">Connect</button>
-            <div id="status" class="status"></div>
-        </form>
-    </div>
-    <script>
-        fetch('/scan').then(r => r.json()).then(networks => {
-            const select = document.getElementById('ssid');
-            select.innerHTML = '<option value="">Select a network...</option>';
-            networks.forEach(n => {
-                const option = document.createElement('option');
-                option.value = n.ssid;
-                option.textContent = n.ssid + ' (' + n.rssi + ' dBm)';
-                select.appendChild(option);
-            });
-        }).catch(e => {
-            document.getElementById('ssid').innerHTML = '<option value="">Scan failed</option>';
-        });
-
-        document.getElementById('wifiForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const ssid = document.getElementById('ssid').value;
-            const password = document.getElementById('password').value;
-            const submitBtn = document.getElementById('submitBtn');
-            const status = document.getElementById('status');
-
-            if (!ssid) {
-                status.className = 'status error';
-                status.textContent = 'Please select a network';
-                return;
-            }
-
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Connecting...';
-            status.className = 'status';
-            status.style.display = 'none';
-
-            try {
-                const response = await fetch('/connect', {
-                    method: 'POST',
-                    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-                    body: 'ssid=' + encodeURIComponent(ssid) + '&password=' + encodeURIComponent(password)
-                });
-
-                const result = await response.json();
-
-                if (result.success) {
-                    status.className = 'status success';
-                    status.textContent = 'Connected! Device will restart...';
-                    setTimeout(() => { window.location.reload(); }, 3000);
-                } else {
-                    status.className = 'status error';
-                    status.textContent = 'Connection failed: ' + (result.message || 'Unknown error');
-                    submitBtn.disabled = false;
-                    submitBtn.textContent = 'Connect';
-                }
-            } catch (error) {
-                status.className = 'status error';
-                status.textContent = 'Request failed: ' + error.message;
-                submitBtn.disabled = false;
-                submitBtn.textContent = 'Connect';
-            }
-        });
-    </script>
-</body>
-</html>
-    )html";
 }
 
 void WiFiProvisioning::setupWebServer() {
@@ -353,5 +227,5 @@ void WiFiProvisioning::setupWebServer() {
     });
 
     server->begin();
-    Serial.println("Web server started with captive portal support");
+    Serial.println("Web server started");
 }

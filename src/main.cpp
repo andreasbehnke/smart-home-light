@@ -4,6 +4,7 @@
 WiFiProvisioning wifiProv;
 
 void printSystemInfo();
+void handleSerialCommands();
 
 void setup() {
     Serial.begin(115200);
@@ -23,8 +24,11 @@ void setup() {
 }
 
 void loop() {
-    // Handle WiFi provisioning (DNS server for captive portal)
+    // Handle WiFi provisioning
     wifiProv.loop();
+
+    // Handle serial commands
+    handleSerialCommands();
 
     static unsigned long lastPrint = 0;
     unsigned long currentMillis = millis();
@@ -46,7 +50,7 @@ void loop() {
         Serial.println();
     }
 
-    delay(10);  // Reduced delay for better DNS responsiveness
+    delay(10);
 }
 
 void printSystemInfo() {
@@ -57,5 +61,39 @@ void printSystemInfo() {
     Serial.printf("  Free Heap: %d bytes\n", ESP.getFreeHeap());
     Serial.printf("  Flash Size: %d bytes\n", ESP.getFlashChipSize());
     Serial.printf("  SDK Version: %s\n\n", ESP.getSdkVersion());
+}
+
+void handleSerialCommands() {
+    static String commandBuffer = "";
+
+    while (Serial.available() > 0) {
+        char c = Serial.read();
+
+        if (c == '\n' || c == '\r') {
+            if (commandBuffer.length() > 0) {
+                // Trim whitespace
+                commandBuffer.trim();
+                commandBuffer.toLowerCase();
+
+                // Process command
+                if (commandBuffer == "reset wifi") {
+                    Serial.println("\nResetting WiFi credentials...");
+                    wifiProv.reset();
+                    // Device will restart after reset
+                } else if (commandBuffer == "help") {
+                    Serial.println("\nAvailable commands:");
+                    Serial.println("  reset wifi - Clear saved WiFi credentials and restart");
+                    Serial.println("  help       - Show this help message");
+                } else {
+                    Serial.printf("\nUnknown command: %s\n", commandBuffer.c_str());
+                    Serial.println("Type 'help' for available commands");
+                }
+
+                commandBuffer = "";
+            }
+        } else {
+            commandBuffer += c;
+        }
+    }
 }
 

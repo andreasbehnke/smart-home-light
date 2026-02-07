@@ -27,7 +27,6 @@ Common approaches include:
 
 We will implement a **custom WiFi provisioning system** with captive portal support using:
 - **Preferences (NVS)** for credential storage
-- **DNSServer** for captive portal DNS redirection
 - **ESPAsyncWebServer** for the configuration web interface
 
 Initially planned to use ESPAsync_WiFiManager library, but encountered API compatibility issues with the current Arduino ESP32 framework (v3.1.3). The library uses deprecated WiFi API methods (`getAutoConnect()`, `setAutoConnect()`) that were replaced with `getAutoReconnect()` and `setAutoReconnect()` in newer framework versions.
@@ -98,10 +97,6 @@ Handles OS-specific captive portal detection endpoints:
 - Android: `/generate_204`, `/gen_204`
 - iOS/macOS: `/hotspot-detect.html`, `/library/test/success.html`
 - Windows: `/connecttest.txt`, `/ncsi.txt`
-
-**DNS Configuration:**
-- DNSServer redirects all DNS queries to `192.168.4.1`
-- Enables automatic captive portal popup on mobile devices
 - Catch-all HTTP handler redirects unknown requests to config page
 
 **Web Interface Features:**

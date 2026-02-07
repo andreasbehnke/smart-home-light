@@ -71,6 +71,7 @@ See [template.md](template.md) for the ADR template.
 List of all ADRs in this project:
 
 - [0001-use-platformio-for-build-system.md](0001-use-platformio-for-build-system.md) - Use PlatformIO as build system
-- [0002-use-espasync-wifimanager-for-provisioning.md](0002-use-espasync-wifimanager-for-provisioning.md) - Use ESPAsync_WiFiManager for WiFi provisioning
+- [0002-use-espasync-wifimanager-for-provisioning.md](0002-use-espasync-wifimanager-for-provisioning.md) - Custom WiFi provisioning with captive portal
+- [0003-material-design-framework-for-web-ui.md](0003-material-design-framework-for-web-ui.md) - Use Material Design framework for all web interfaces
 
 (Add new ADRs to this list as they are created)
