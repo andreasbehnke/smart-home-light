@@ -39,7 +39,9 @@ This serves as the foundation for incremental development.
 
 ## Development Workflow
 
-Features will be added incrementally with architecture decisions documented. The next steps will include:
+Features will be added incrementally with architecture decisions documented in [Architecture Decision Records (ADRs)](docs/adr/README.md).
+
+The next steps will include:
 1. LED strip control configuration
 2. WiFi connectivity
 3. Web server implementation
