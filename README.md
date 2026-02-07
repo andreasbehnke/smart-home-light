@@ -30,12 +30,18 @@ smart-home-light/
 
 ## Current Status
 
-The firmware currently implements a minimal "Hello World" application that:
-- Initializes serial communication at 115200 baud
-- Prints system information (CPU frequency, free heap, chip model)
-- Outputs uptime and memory status every 5 seconds
+The firmware currently implements:
 
-This serves as the foundation for incremental development.
+### WiFi Provisioning
+- Automatic WiFi connection with captive portal
+- Access Point mode for initial configuration
+- Credential storage in NVS (Non-Volatile Storage)
+- See [WiFi Provisioning Guide](docs/WIFI_PROVISIONING.md) for details
+
+### System Monitoring
+- Serial communication at 115200 baud
+- System information display (CPU, memory, WiFi)
+- Connection status monitoring every 10 seconds
 
 ## Development Workflow
 
